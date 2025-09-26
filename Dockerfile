@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,7 +20,7 @@ COPY . .
 EXPOSE 7860
 
 # Define environment variable
-ENV STREAMLIT_SERVER_PORT 8501
+ENV STREAMLIT_SERVER_PORT 7860
 ENV STREAMLIT_SERVER_ADDRESS 0.0.0.0
 
 # Run app.py when the container launches
