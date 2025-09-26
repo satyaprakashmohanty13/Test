@@ -1,6 +1,6 @@
 import streamlit as st
-import os
-from mitra import process_files
+from mitra import process_files, __description__
+from args import Setup
 
 def main():
     st.set_page_config(page_title="Mitra Polyglot Generator", layout="wide")
@@ -46,14 +46,12 @@ def main():
                 'verbose': True, # Capture verbose output for the log
             }
 
-            if not os.path.exists('out'):
-                os.makedirs('out')
+            Setup(__description__, config=options)
 
             with st.spinner("Processing... this may take a moment."):
                 results, generated_files = process_files(
                     file1_name, file1_data,
-                    file2_name, file2_data,
-                    options
+                    file2_name, file2_data
                 )
 
             st.header("Results")
