@@ -3,8 +3,8 @@ from mitra import process_files, __description__
 from args import Setup
 
 def main():
-    st.set_page_config(page_title="Mitra Polyglot Generator", layout="wide")
-    st.title("Mitra - Polyglot File Generator")
+    st.set_page_config(page_title="Polyglot Generator", layout="wide")
+    st.title("Polyglot File Generator")
     st.write("This tool generates polyglot files by combining two input files using various techniques.")
 
     st.header("Controls")
