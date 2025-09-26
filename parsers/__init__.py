@@ -25,7 +25,7 @@ __all__ = [
 	"tar", "wad", "xz", "zip_", "zstd",
 
 # media
-	"id3v1", "id3v2", "flac", "flv",
+	"id3v1", "id3v2", "mp3", "flac", "flv",
 
 # misc
 	"lnk",
