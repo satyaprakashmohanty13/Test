@@ -1,34 +1,20 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for pymupdf
-RUN apt-get update && apt-get install -y libmupdf-dev && rm -rf /var/lib/apt/lists/*
-
-# Create a non-root user
-RUN useradd -m -u 1000 streamlit
-
-# Copy the requirements file and install dependencies
+# Copy the requirements file into the container
 COPY requirements.txt .
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application's code
+# Copy the rest of the application code into the container
 COPY . .
 
-# Change ownership of the app directory
-RUN chown -R streamlit:streamlit /app
-
-# Switch to the non-root user
-USER streamlit
-
-# Make port 7860 available to the world outside this container
+# Expose the port for Hugging Face Spaces
 EXPOSE 7860
 
-# Define environment variables
-ENV STREAMLIT_SERVER_PORT 7860
-ENV STREAMLIT_SERVER_ADDRESS 0.0.0.0
-
-# Run app.py when the container launches
-CMD ["streamlit", "run", "app.py"]
+# Set the command to run the Streamlit application on the correct port
+CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0", "--browser.gatherUsageStats=false", "--server.enableXsrfProtection=false"]
