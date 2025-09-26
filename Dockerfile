@@ -22,7 +22,7 @@ EXPOSE 7860
 # Define environment variable
 ENV STREAMLIT_SERVER_PORT 7860
 ENV STREAMLIT_SERVER_ADDRESS 0.0.0.0
-ENV STREAMLIT_BROWSER_GATHERUSAGSTATS false
+ENV STREAMLIT_GLOBAL_GATHERUSAGESTATS false
 
 # Run app.py when the container launches
 CMD ["streamlit", "run", "app.py"]
