@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Make port 8501 available to the world outside this container
-EXPOSE 8501
+EXPOSE 7860
 
 # Define environment variable
 ENV STREAMLIT_SERVER_PORT 8501
