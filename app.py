@@ -7,23 +7,25 @@ def main():
     st.title("Mitra - Polyglot File Generator")
     st.write("This tool generates polyglot files by combining two input files using various techniques.")
 
-    st.sidebar.title("Controls")
+    st.header("Controls")
 
-    # File uploaders
-    st.sidebar.header("1. Upload Files")
-    uploaded_file1 = st.sidebar.file_uploader("Upload the first file (e.g., the container)")
-    uploaded_file2 = st.sidebar.file_uploader("Upload the second file (e.g., the payload)")
+    col1, col2 = st.columns(2)
 
-    # Options
-    st.sidebar.header("2. Select Options")
-    reverse = st.sidebar.checkbox("Reverse Order (file2 as container)")
-    split = st.sidebar.checkbox("Split Payloads")
-    force = st.sidebar.checkbox("Force File 2 as a generic binary blob")
-    overlap = st.sidebar.checkbox("Generate Overlapping Polyglots (experimental)")
-    pad = st.sidebar.number_input("Pad payloads to a specific size (in Kb)", min_value=0, value=0, step=1)
+    with col1:
+        st.subheader("1. Upload Files")
+        uploaded_file1 = st.file_uploader("Upload the first file (e.g., the container)")
+        uploaded_file2 = st.file_uploader("Upload the second file (e.g., the payload)")
 
-    st.sidebar.header("3. Generate")
-    generate_button = st.sidebar.button("Generate Polyglots")
+    with col2:
+        st.subheader("2. Select Options")
+        reverse = st.checkbox("Reverse Order (file2 as container)")
+        split = st.checkbox("Split Payloads")
+        force = st.checkbox("Force File 2 as a generic binary blob")
+        overlap = st.checkbox("Generate Overlapping Polyglots (experimental)")
+        pad = st.number_input("Pad payloads to a specific size (in Kb)", min_value=0, value=0, step=1)
+
+    st.header("3. Generate")
+    generate_button = st.button("Generate Polyglots")
 
     if generate_button:
         if uploaded_file1 and uploaded_file2:
@@ -56,13 +58,13 @@ def main():
 
             st.header("Results")
 
-            col1, col2 = st.columns(2)
+            res_col1, res_col2 = st.columns(2)
 
-            with col1:
+            with res_col1:
                 st.subheader("Generation Log")
                 st.text_area("Log Output", value="\\n".join(results), height=400, help="Detailed log of the generation process.")
 
-            with col2:
+            with res_col2:
                 st.subheader("Download Files")
                 if generated_files:
                     for filename, data in generated_files:
@@ -76,7 +78,7 @@ def main():
                     st.warning("No polyglot files were generated. Check the log for more information.")
 
         else:
-            st.sidebar.error("Please upload both files to begin.")
+            st.error("Please upload both files to begin.")
 
 if __name__ == "__main__":
     main()
